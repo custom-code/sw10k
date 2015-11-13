@@ -2,9 +2,18 @@ package com.sw10k.zhe.reptile.csdn;
 
 import com.sw10k.zhe.reptile.bean.CommonException;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class DataUtil {
@@ -15,7 +24,7 @@ public class DataUtil {
      * @return
      * @throws CommonException
      */
-    public static String doGet(String urlStr) throws CommonException {
+    public static String doGet2(String urlStr) throws CommonException {
         StringBuffer sb = new StringBuffer();
         try {
             URL url = new URL(urlStr);
@@ -37,10 +46,21 @@ public class DataUtil {
             }
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             throw new CommonException("访问网络失败11");
         }
         return sb.toString();
+    }
+
+    public static String doGet(String urlStr) throws CommonException {
+        Connection conn = Jsoup.connect(urlStr);
+        conn.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+        Document doc = null;
+        try {
+            doc = conn.get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return doc.toString();
     }
 }

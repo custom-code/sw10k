@@ -1,10 +1,13 @@
 package com.sw10k.zhe.reptile.test;
 
+import android.os.AsyncTask;
+
 import com.sw10k.zhe.reptile.bean.CommonException;
 import com.sw10k.zhe.reptile.bean.NewsItem;
 import com.sw10k.zhe.reptile.biz.NewsItemBiz;
 import com.sw10k.zhe.reptile.csdn.Constant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,53 +18,96 @@ public class Test {
         test.test01();
     }
 
-    //	@org.junit.Test
     public void test01() {
-        NewsItemBiz biz = new NewsItemBiz();
-        int currentPage = 1;
-        try {
-            /**
-             * 业界
-             */
-            System.out.println("-----------业界-----------");
-            List<NewsItem> newsItems = biz.getNewsItems(Constant.NEWS_TYPE_YEJIE, currentPage);
-            for (NewsItem item : newsItems) {
-                System.out.println(item);
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                List<NewsItem> newsItems = new ArrayList<>();
+                NewsItemBiz biz = new NewsItemBiz();
+                try {
+                    newsItems = biz.getNewsItems(Constant.NEWS_TYPE_CHENGXUYUAN, 1);
+                } catch (CommonException e) {
+                    e.printStackTrace();
+                }
+                for (NewsItem item : newsItems) {
+                    System.out.println(item);
+                }
             }
+        }).start();
+    }
 
-            /**
-             * 程序员杂志
-             */
-            System.out.println("-----------程序员-----------");
-            newsItems = biz.getNewsItems(Constant.NEWS_TYPE_CHENGXUYUAN, currentPage);
-            for (NewsItem item : newsItems) {
-                System.out.println(item);
+    //	@org.junit.Test
+    public void test02() {
+
+        final int currentPage = 1;
+
+        NewsAsyncTask task = new NewsAsyncTask(currentPage);
+        task.execute();
+    }
+
+    class NewsAsyncTask extends AsyncTask<String, Integer, List<NewsItem>> {
+
+        private int currentPage;
+
+        public NewsAsyncTask(int currentPage) {
+            this.currentPage = currentPage;
+        }
+
+        @Override
+        protected List<NewsItem> doInBackground(String... params) {
+            List<NewsItem> newsItems = new ArrayList<>();
+            try {
+                final NewsItemBiz biz = new NewsItemBiz();
+                /**
+                 * 业界
+                 */
+                System.out.println("-----------业界-----------");
+                newsItems = biz.getNewsItems(Constant.NEWS_TYPE_YEJIE, currentPage);
+                for (NewsItem item : newsItems) {
+                    System.out.println(item);
+                }
+
+                /**
+                 * 程序员杂志
+                 */
+                System.out.println("-----------程序员-----------");
+                newsItems = biz.getNewsItems(Constant.NEWS_TYPE_CHENGXUYUAN, currentPage);
+                for (NewsItem item : newsItems) {
+                    System.out.println(item);
+                }
+
+                /**
+                 * 研发
+                 */
+                System.out.println("-----------研发-----------");
+                newsItems = biz.getNewsItems(Constant.NEWS_TYPE_YANFA, currentPage);
+                for (NewsItem item : newsItems) {
+                    System.out.println(item);
+                }
+
+
+                /**
+                 * 移动
+                 */
+                System.out.println("-------------移动---------");
+                newsItems = biz.getNewsItems(Constant.NEWS_TYPE_YIDONG, currentPage);
+                for (NewsItem item : newsItems) {
+                    System.out.println(item);
+                }
+                System.out.println("-------------结束---------");
+            } catch (CommonException e) {
+                e.printStackTrace();
             }
+            return newsItems;
+        }
 
-            /**
-             * 研发
-             */
-            System.out.println("-----------研发-----------");
-            newsItems = biz.getNewsItems(Constant.NEWS_TYPE_YANFA, currentPage);
-            for (NewsItem item : newsItems) {
-                System.out.println(item);
-            }
-
-
-            /**
-             * 移动
-             */
-            System.out.println("-------------移动---------");
-            newsItems = biz.getNewsItems(Constant.NEWS_TYPE_YIDONG, currentPage);
-            for (NewsItem item : newsItems) {
-                System.out.println(item);
-            }
-            System.out.println("-------------结束---------");
-
-        } catch (CommonException e) {
-            e.printStackTrace();
+        @Override
+        protected void onPostExecute(List<NewsItem> s) {
+            super.onPostExecute(s);
         }
     }
+
 
 }
 //<div class="unit">

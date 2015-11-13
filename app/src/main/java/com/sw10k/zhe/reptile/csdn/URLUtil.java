@@ -21,7 +21,7 @@ public class URLUtil {
      */
     public static String generateUrl(int newsType, int currentPage) {
         currentPage = currentPage > 0 ? currentPage : 1;
-        String urlStr = "";
+        String urlStr;
         switch (newsType) {
             case Constant.NEWS_TYPE_YEJIE:
                 urlStr = NEWS_LIST_URL_YEJIE;
@@ -39,8 +39,6 @@ public class URLUtil {
                 urlStr = NEWS_LIST_URL_YIDONG;
                 break;
         }
-
-
         urlStr += "/" + currentPage;
 
         return urlStr;
