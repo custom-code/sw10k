@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sw10k.zhe.sw10k.R;
+import com.sw10k.zhe.sw10k.view.InstrumentView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BlankFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -46,6 +50,18 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blank, container, false);
         view.findViewById(R.id.tabs);
+        final InstrumentView instrumentView = (InstrumentView) view.findViewById(R.id.iView);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                instrumentView.setReferValue(682, new InstrumentView.RotateListener() {
+                    @Override
+                    public void rotate(float sweepAngle, final float value) {
+
+                    }
+                });
+            }
+        },1000);
         return view;
     }
 

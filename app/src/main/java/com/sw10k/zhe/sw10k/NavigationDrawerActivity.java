@@ -56,6 +56,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         fragments.add(PlusOneFragment.newInstance("", ""));
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments);
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(fragments.size());
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -75,6 +76,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_camara);
     }
 
     private int getTabImageId(int position) {
