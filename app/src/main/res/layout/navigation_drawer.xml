@@ -7,18 +7,21 @@
     android:fitsSystemWindows="true"
     tools:context="com.sw10k.zhe.sw10k.NavigationDrawerActivity">
 
-    <include
-        layout="@layout/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/app_bar" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+        android:id="@+id/navigation_drawer_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <include layout="@layout/content_navigation_drawer" />
+    <!--<FrameLayout-->
+        <!--android:id="@+id/navigation_drawer_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--tools:context="com.sw10k.zhe.sw10k.NavigationDrawerActivity"-->
+        <!--tools:showIn="@layout/navigation_drawer" />-->
 
     <include layout="@layout/floating_action_button" />
 

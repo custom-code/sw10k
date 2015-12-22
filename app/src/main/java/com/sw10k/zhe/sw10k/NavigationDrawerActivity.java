@@ -3,32 +3,32 @@ package com.sw10k.zhe.sw10k;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.sw10k.zhe.sw10k.fragment.BlankFragment;
-import com.sw10k.zhe.sw10k.fragment.OnFragmentInteractionListener;
-import com.sw10k.zhe.sw10k.fragment.PlaceholderFragment;
-import com.sw10k.zhe.sw10k.fragment.PlusOneFragment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sw10k.zhe.sw10k.adapter.SectionsPagerAdapter;
+import com.sw10k.zhe.sw10k.fragment.CameraFragment;
+import com.sw10k.zhe.sw10k.fragment.GalleryFragment;
+import com.sw10k.zhe.sw10k.listener.OnFragmentInteractionListener;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnFragmentInteractionListener {
 
-    private Toolbar toolbar;
+    private Toolbar toolbar, toolbarChild;
     private FloatingActionButton fab;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -37,8 +37,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
 
-    private List<Fragment> fragments;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +44,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        toolbarChild = (Toolbar) findViewById(R.id.toolbar_child);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
-        fragments = new ArrayList<>();
-        fragments.add(BlankFragment.newInstance("", ""));
-        fragments.add(PlaceholderFragment.newInstance(2));
-        fragments.add(PlusOneFragment.newInstance("", ""));
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments);
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setOffscreenPageLimit(fragments.size());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.navigation_drawer_container);
+        mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -64,7 +59,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             if (tab != null) {
-                tab.setIcon(getTabImageId(i));
+                tab.setIcon(mSectionsPagerAdapter.getTabImageId(i));
             }
         }
 
@@ -74,17 +69,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_camara);
-    }
-
-    private int getTabImageId(int position) {
-        Integer[] imageResId = new Integer[]{
-                R.drawable.ic_person_24dp,
-                R.drawable.ic_notifications_24dp,
-                R.drawable.ic_person_24dp};
-        return imageResId[position];
+//        navigationView.setCheckedItem(R.id.nav_camera);
     }
 
     @Override
@@ -98,7 +85,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+        getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         return true;
     }
 
@@ -114,9 +101,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_camara:
+            case R.id.nav_camera:
+//                setSupportActionBar(toolbarChild);
+                toggleFragment(CameraFragment.newInstance("", ""));
                 break;
             case R.id.nav_gallery:
+                toggleFragment(GalleryFragment.newInstance("", ""));
                 break;
             case R.id.nav_slideshow:
                 break;
@@ -130,6 +120,38 @@ public class NavigationDrawerActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void toggleFragment(Fragment curFragment) {
+        Log.d("aa", "toggleFragment");
+        FragmentManager manager = getSupportFragmentManager();
+        String tag = curFragment.getClass().getSimpleName();
+//        FragmentTransaction transaction = obtainFragmentTransaction(manager, postion);
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment = manager.findFragmentByTag(tag);
+        if (fragment == null) {
+            try {
+                // 替换时保留Fragment,以便复用
+                transaction.replace(R.id.navigation_drawer_content, curFragment, tag);
+                transaction.addToBackStack(tag);
+            } catch (Exception e) {
+                // ignore
+            }
+        } else {
+            transaction.replace(R.id.navigation_drawer_content, fragment, tag);
+        }
+        transaction.commit();
+    }
+
+//    private FragmentTransaction obtainFragmentTransaction(FragmentManager manager, boolean bBack) {
+//        FragmentTransaction ft = manager.beginTransaction();
+//        // 设置切换动画
+//        if (!bBack) {
+//            ft.setCustomAnimations(R.anim.fragment_slide_in_from_right, R.anim.fragment_slide_out_to_left);
+//        } else {
+//            ft.setCustomAnimations(R.anim.fragment_slide_in_from_left, R.anim.fragment_slide_out_to_right);
+//        }
+//        return ft;
+//    }
 
     @Override
     public void onClick(View v) {

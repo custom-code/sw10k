@@ -1,9 +1,11 @@
-package com.sw10k.zhe.sw10k;
+package com.sw10k.zhe.sw10k.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.sw10k.zhe.sw10k.R;
+import com.sw10k.zhe.sw10k.fragment.BlankFragment;
 import com.sw10k.zhe.sw10k.fragment.PlaceholderFragment;
 import com.sw10k.zhe.sw10k.fragment.PlusOneFragment;
 
@@ -13,21 +15,27 @@ import java.util.List;
  * Created by zhe on 15/11/13.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    private List<Fragment> list;
+    private int PAGE_COUNT = 3;
 
-    public SectionsPagerAdapter(FragmentManager fm, List<Fragment> list) {
+    public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.list = list;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return list.get(position);
+        switch (position) {
+            case 1:
+                return BlankFragment.newInstance("", "");
+            case 2:
+                return PlusOneFragment.newInstance("", "");
+            default:
+                return PlaceholderFragment.newInstance(2);
+        }
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return PAGE_COUNT;
     }
 
     @Override
@@ -41,5 +49,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 //                return "3";
 //        }
         return null;
+    }
+
+
+    public int getTabImageId(int position) {
+        Integer[] imageResId = new Integer[]{
+                R.drawable.ic_person_24dp,
+                R.drawable.ic_notifications_24dp,
+                R.drawable.ic_favorite_24dp};
+        return imageResId[position];
     }
 }

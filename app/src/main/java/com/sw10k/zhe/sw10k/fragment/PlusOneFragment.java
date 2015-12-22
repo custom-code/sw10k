@@ -16,6 +16,7 @@ import android.widget.VideoView;
 
 import com.google.android.gms.plus.PlusOneButton;
 import com.sw10k.zhe.sw10k.R;
+import com.sw10k.zhe.sw10k.listener.OnFragmentInteractionListener;
 
 public class PlusOneFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
@@ -45,7 +46,6 @@ public class PlusOneFragment extends Fragment implements View.OnClickListener {
     }
 
     public PlusOneFragment() {
-        // Required empty public constructor
     }
 
     @Override
