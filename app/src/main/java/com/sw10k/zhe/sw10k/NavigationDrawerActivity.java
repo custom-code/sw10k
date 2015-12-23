@@ -42,6 +42,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
 
+
         setToolbar();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
