@@ -28,7 +28,7 @@ import com.sw10k.zhe.sw10k.listener.OnFragmentInteractionListener;
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnFragmentInteractionListener {
 
-    private Toolbar toolbar, toolbarChild;
+    private Toolbar toolbar;
     private FloatingActionButton fab;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -42,9 +42,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-//        toolbarChild = (Toolbar) findViewById(R.id.toolbar_child);
+        setToolbar();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
@@ -63,15 +61,26 @@ public class NavigationDrawerActivity extends AppCompatActivity
             }
         }
 
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setCheckedItem(R.id.nav_camera);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Navigation", "onResume");
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
-//        navigationView.setCheckedItem(R.id.nav_camera);
     }
 
     @Override
@@ -99,13 +108,19 @@ public class NavigationDrawerActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_camera:
-//                setSupportActionBar(toolbarChild);
+                setToolbar();
                 toggleFragment(CameraFragment.newInstance("", ""));
                 break;
             case R.id.nav_gallery:
+                setToolbar();
                 toggleFragment(GalleryFragment.newInstance("", ""));
                 break;
             case R.id.nav_slideshow:
@@ -122,7 +137,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
     }
 
     private void toggleFragment(Fragment curFragment) {
-        Log.d("aa", "toggleFragment");
         FragmentManager manager = getSupportFragmentManager();
         String tag = curFragment.getClass().getSimpleName();
 //        FragmentTransaction transaction = obtainFragmentTransaction(manager, postion);
