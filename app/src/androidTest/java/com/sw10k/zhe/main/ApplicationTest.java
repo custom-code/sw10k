@@ -1,4 +1,4 @@
-package com.sw10k.zhe.sw10k;
+package com.sw10k.zhe.main;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
