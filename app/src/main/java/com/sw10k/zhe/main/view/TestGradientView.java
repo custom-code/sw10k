@@ -1,4 +1,4 @@
-package com.sw10k.zhe.sw10k.view;
+package com.sw10k.zhe.main.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

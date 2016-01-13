@@ -1,15 +1,13 @@
-package com.sw10k.zhe.sw10k.adapter;
+package com.sw10k.zhe.main.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.sw10k.zhe.sw10k.R;
-import com.sw10k.zhe.sw10k.fragment.BlankFragment;
-import com.sw10k.zhe.sw10k.fragment.PlaceholderFragment;
-import com.sw10k.zhe.sw10k.fragment.PlusOneFragment;
-
-import java.util.List;
+import com.sw10k.zhe.main.R;
+import com.sw10k.zhe.main.fragment.BlankFragment;
+import com.sw10k.zhe.main.fragment.PlaceholderFragment;
+import com.sw10k.zhe.main.fragment.PlusOneFragment;
 
 /**
  * Created by zhe on 15/11/13.

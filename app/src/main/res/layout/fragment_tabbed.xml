@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sw10k.zhe.sw10k.TabbedActivity$PlaceholderFragment">
+    tools:context="com.sw10k.zhe.main.TabbedActivity$PlaceholderFragment">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs_child"

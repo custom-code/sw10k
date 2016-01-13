@@ -1,4 +1,4 @@
-package com.sw10k.zhe.sw10k.fragment;
+package com.sw10k.zhe.main.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,8 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.google.android.gms.plus.PlusOneButton;
-import com.sw10k.zhe.sw10k.R;
-import com.sw10k.zhe.sw10k.listener.OnFragmentInteractionListener;
+import com.sw10k.zhe.main.R;
+import com.sw10k.zhe.main.listener.OnFragmentInteractionListener;
 
 public class PlusOneFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";

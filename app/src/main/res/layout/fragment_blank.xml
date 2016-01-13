@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sw10k.zhe.sw10k.fragment.BlankFragment">
+    tools:context="com.sw10k.zhe.main.fragment.BlankFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment" />
 
-    <com.sw10k.zhe.sw10k.view.InstrumentView
+    <com.sw10k.zhe.main.view.InstrumentView
         android:id="@+id/iView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

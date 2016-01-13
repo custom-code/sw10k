@@ -1,4 +1,4 @@
-package com.sw10k.zhe.sw10k;
+package com.sw10k.zhe.main;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,10 +20,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sw10k.zhe.sw10k.adapter.SectionsPagerAdapter;
-import com.sw10k.zhe.sw10k.fragment.CameraFragment;
-import com.sw10k.zhe.sw10k.fragment.GalleryFragment;
-import com.sw10k.zhe.sw10k.listener.OnFragmentInteractionListener;
+import com.sw10k.zhe.main.adapter.SectionsPagerAdapter;
+import com.sw10k.zhe.main.fragment.CameraFragment;
+import com.sw10k.zhe.main.fragment.GalleryFragment;
+import com.sw10k.zhe.main.listener.OnFragmentInteractionListener;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnFragmentInteractionListener {
@@ -77,11 +77,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
     }
 
     @Override

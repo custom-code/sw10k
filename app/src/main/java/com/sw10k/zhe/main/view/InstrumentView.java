@@ -1,4 +1,4 @@
-package com.sw10k.zhe.sw10k.view;
+package com.sw10k.zhe.main.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.sw10k.zhe.sw10k.R;
+import com.sw10k.zhe.main.R;
 
 /**
  * 高仿阿里芝麻信用分仪表盘效果

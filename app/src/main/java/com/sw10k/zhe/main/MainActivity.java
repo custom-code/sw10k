@@ -1,5 +1,6 @@
-package com.sw10k.zhe.sw10k;
+package com.sw10k.zhe.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,32 +11,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
-import com.sw10k.zhe.reptile.test.Test;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+//    @Bind(R.id.btn_navigation_page)
+    Button vBtnNavigationPage;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = MainActivity.this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(View.GONE);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Test test = new Test();
-//                test.test02();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                startActivity(new Intent(MainActivity.this, NavigationDrawerActivity.class));
-            }
-        });
     }
 
     @Override
@@ -51,5 +46,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.btn_navigation_page:
+                intent.setClass(context, NavigationDrawerActivity.class);
+                break;
+        }
     }
 }

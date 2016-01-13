@@ -1,21 +1,19 @@
-package com.sw10k.zhe.sw10k.fragment;
+package com.sw10k.zhe.main.fragment;
 
-import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sw10k.zhe.sw10k.R;
-import com.sw10k.zhe.sw10k.listener.OnFragmentInteractionListener;
-import com.sw10k.zhe.sw10k.view.InstrumentView;
+import com.sw10k.zhe.main.R;
+import com.sw10k.zhe.main.listener.OnFragmentInteractionListener;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class BlankFragment extends Fragment {
+public class CameraFragment extends Fragment {
+    private AppCompatActivity activity;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -24,8 +22,11 @@ public class BlankFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public static BlankFragment newInstance(String param1, String param2) {
-        BlankFragment fragment = new BlankFragment();
+    public CameraFragment() {
+    }
+
+    public static CameraFragment newInstance(String param1, String param2) {
+        CameraFragment fragment = new CameraFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -33,12 +34,10 @@ public class BlankFragment extends Fragment {
         return fragment;
     }
 
-    public BlankFragment() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.activity = (AppCompatActivity) getActivity();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -48,20 +47,9 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
-        view.findViewById(R.id.tabs);
-        final InstrumentView instrumentView = (InstrumentView) view.findViewById(R.id.iView);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                instrumentView.setReferValue(682, new InstrumentView.RotateListener() {
-                    @Override
-                    public void rotate(float sweepAngle, final float value) {
 
-                    }
-                });
-            }
-        }, 1000);
+        View view = inflater.inflate(R.layout.fragment_camera, container, false);
+
         return view;
     }
 
@@ -72,12 +60,12 @@ public class BlankFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
@@ -87,6 +75,5 @@ public class BlankFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
 
 }

@@ -1,4 +1,4 @@
-package com.sw10k.zhe.sw10k.fragment;
+package com.sw10k.zhe.main.fragment;
 
 
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sw10k.zhe.sw10k.R;
+import com.sw10k.zhe.main.R;
 
 /**
  * A simple {@link Fragment} subclass.

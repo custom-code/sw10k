@@ -10,6 +10,4 @@
 
     <include layout="@layout/activity_main_content" />
 
-    <include layout="@layout/floating_action_button" />
-
 </android.support.design.widget.CoordinatorLayout>
