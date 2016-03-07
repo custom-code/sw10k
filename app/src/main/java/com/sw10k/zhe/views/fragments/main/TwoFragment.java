@@ -14,20 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import com.google.android.gms.plus.PlusOneButton;
 import com.sw10k.zhe.R;
 import com.sw10k.zhe.controller.listener.OnFragmentInteractionListener;
 
 public class TwoFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    private final String PLUS_ONE_URL = "http://developer.android.com";
 
     private String mParam1;
     private String mParam2;
 
-    private PlusOneButton mPlusOneButton;
     private VideoView mVideoView;
     private MediaController controller;
     private Button play;
@@ -61,7 +57,6 @@ public class TwoFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plus_one, container, false);
-        mPlusOneButton = (PlusOneButton) view.findViewById(R.id.plus_one_button);
         mVideoView = (VideoView) view.findViewById(R.id.video_view);
         controller = new MediaController(context);
         mVideoView.setMediaController(controller);
@@ -101,13 +96,6 @@ public class TwoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        mPlusOneButton.initialize(PLUS_ONE_URL, PLUS_ONE_REQUEST_CODE);
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

@@ -8,11 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sw10k.zhe.main.TabbedActivity$PlaceholderFragment">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs_child"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
