@@ -10,25 +10,25 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.sw10k.zhe.R;
-import com.sw10k.zhe.views.activities.base.BaseActivity;
+import com.sw10k.zhe.views.activities.base.Sw10kBaseActivity;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
-public class TestActivity extends BaseActivity implements ObservableScrollViewCallbacks {
+@EActivity
+public class TestActivity extends Sw10kBaseActivity implements ObservableScrollViewCallbacks {
 
     private int mParallaxImageHeight = 180;
-    @Bind(R.id.toolbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.imageView)
+    @ViewById(R.id.imageView)
     ImageView vIvHead;
-    @Bind(R.id.scroll)
+    @ViewById(R.id.scroll)
     ObservableScrollView vScrollView;
 
     @Override
     protected void initContentView() {
         setContentView(R.layout.activity_test);
-        ButterKnife.bind(this);
 
         vScrollView.setScrollViewCallbacks(this);
 //        TestObject testObject = new TestObject();

@@ -16,27 +16,28 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sw10k.zhe.R;
-import com.sw10k.zhe.views.activities.base.BaseActivity;
+import com.sw10k.zhe.views.activities.base.Sw10kBaseActivity;
 import com.sw10k.zhe.views.adapter.main.SectionsPagerAdapter;
 import com.sw10k.zhe.controller.listener.OnFragmentInteractionListener;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
-public class NavigationDrawerActivity extends BaseActivity
+@EActivity
+public class NavigationDrawerActivity extends Sw10kBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnFragmentInteractionListener {
 
-    @Bind(R.id.fab)
+    @ViewById(R.id.fab)
     FloatingActionButton fab;
-    @Bind(R.id.navigation_drawer_container)
+    @ViewById(R.id.navigation_drawer_container)
     ViewPager mViewPager;
-    @Bind(R.id.drawer_layout)
+    @ViewById(R.id.drawer_layout)
     DrawerLayout drawer;
-    @Bind(R.id.navigation_view)
+    @ViewById(R.id.navigation_view)
     NavigationView navigationView;
-    @Bind(R.id.tabs)
+    @ViewById(R.id.tabs)
     TabLayout tabLayout;
-    @Bind(R.id.toolbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ActionBarDrawerToggle toggle;
@@ -44,7 +45,6 @@ public class NavigationDrawerActivity extends BaseActivity
     @Override
     protected void initContentView() {
         setContentView(R.layout.activity_navigation_drawer);
-        ButterKnife.bind(this);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setOffscreenPageLimit(mSectionsPagerAdapter.getCount());

@@ -6,20 +6,20 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sw10k.zhe.R;
-import com.sw10k.zhe.views.activities.base.BaseActivity;
+import com.sw10k.zhe.views.activities.base.Sw10kBaseActivity;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
-public class WeatherActivity extends BaseActivity {
+@EActivity(R.layout.activity_weather)
+public class WeatherActivity extends Sw10kBaseActivity {
 
-    @Bind(R.id.toolbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
 
     @Override
     protected void initContentView() {
-        setContentView(R.layout.activity_weather);
-        ButterKnife.bind(this);
+
     }
 
     @Override

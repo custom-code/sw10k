@@ -9,5 +9,9 @@
     <include layout="@layout/app_bar" />
 
     <include layout="@layout/activity_main_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aaaaaaa"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -120,6 +120,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.button_play:
                 Uri uri = Uri.parse("http://hc.yinyuetai.com/uploads/videos/common/C610014F816532655555F87C505DC13F.flv?sc=42eae861de445ba2");
+                uri = Uri.parse("http://7xi9a6.com2.z0.glb.qiniucdn.com/youqingshuiyue.mp3");
                 mVideoView.setVideoURI(uri);
                 mVideoView.requestFocus();
                 mVideoView.start();
